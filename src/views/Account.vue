@@ -12,10 +12,6 @@
     </div>
 
 
-
-
-
-
   </div>
 </template>
 
@@ -33,6 +29,13 @@ import { mapGetters } from "vuex";
 
 export default {
   name: 'Account',
+
+  computed: {
+    ...mapGetters({
+      user: "user"
+    })
+  },
+  
   methods: {
     signOut: function(event){
       firebase.auth().signOut().then(function() {
@@ -48,7 +51,13 @@ export default {
         console.log("sign out error");
       });
     },
-  }
+  },
+
+  created() {
+    if(!this.user.loggedIn) {
+      router.push("/");
+    }
+  },
 }
 
 /*eslint-enable */

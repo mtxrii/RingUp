@@ -6,8 +6,8 @@ admin.initializeApp();
 
 
 exports.addUser = functions.auth.user().onCreate((user) => {
-   console.log(user);
-   console.log(user.email);
+  console.log(user);
+  console.log(user.email);
 });
 
 /*eslint-enable */

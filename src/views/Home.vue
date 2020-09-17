@@ -15,7 +15,7 @@
 
 <script>
 /*eslint-disable */
-import firebase from "firebase";
+import * as firebase from "firebase/app";
 import firebaseui from "firebaseui";
 import router from "../router";
 import store from "../store";
@@ -67,7 +67,6 @@ export default {
 
   created() {
     if(this.user.loggedIn) {
-      console.log("logged-in");
       router.push("/account");
     }
   },
