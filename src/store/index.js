@@ -10,18 +10,23 @@ export default new Vuex.Store({
       data: null,
     }
   },
+
   getters: {
     user(state) {
       return state.user
     }
   },
+
   mutations: {
     setLoggedIn(state, value) {
       state.user.loggedIn = value;
     },
   },
+
   actions: {
+    
   },
+
   modules: {
     
   }

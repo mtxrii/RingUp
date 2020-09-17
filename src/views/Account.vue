@@ -1,12 +1,14 @@
 <template>
-  <div>
-      <h1>Account page</h1>
+  <div class="account">
+    <h1>Account page</h1>
+
     <div class="my-2" @click="signOut">
       <v-btn 
-      x-large 
-      color="success" 
-      dark
-      >Sign Out</v-btn>
+        x-large 
+        color="success" 
+        dark>
+        Sign Out
+      </v-btn>
     </div>
 
 
@@ -33,21 +35,21 @@ export default {
   name: 'Account',
   methods: {
     signOut: function(event){
-    firebase.auth().signOut().then(function() {
-    // Sign-out successful.
+      firebase.auth().signOut().then(function() {
+        // Sign-out successful.
 
-    //Set state to signed out
-    store.commit("setLoggedIn", false);
-    router.push("/");
-    }).catch(function(error) {
-    // An error happened.
-    console.log("sign out error");
-    });
+        // Set state to signed out
+        store.commit("setLoggedIn", false);
+
+        // Send user to home
+        router.push("/");
+      }).catch(function(error) {
+        // An error happened.
+        console.log("sign out error");
+      });
     },
   }
 }
 
-
 /*eslint-enable */
-
 </script>
