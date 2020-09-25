@@ -24,6 +24,7 @@
   text-align: center;
   background-image: linear-gradient( 135deg, #FFAA85 10%, #B3315F 100%);
   height: 100vh;
+  font-family: 'Roboto', sans-serif;
 }
 
 .ru-card {
@@ -31,8 +32,9 @@
   display: inline-block;
   padding: 50px;
   margin: 50px;
-  border-radius: 5px;
+  border-radius: 3px;
   background-color: rgba(255, 255, 255, 60%);
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.2);
 }
 
 .ru-btn {
@@ -43,6 +45,7 @@
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
   position: relative;
   overflow: hidden;
+  padding-bottom: 3px;
 }
 
 .ru-btn:before {
@@ -52,7 +55,7 @@
   left: 0;
   right: 100%;
   bottom: 0;
-  background: #2098D1;
+  background: #b34b31;
   height: 4px;
   -webkit-transition-property: right;
   transition-property: right;
