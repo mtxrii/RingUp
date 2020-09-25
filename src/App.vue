@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <v-app-bar
-      color="deep-purple accent-4"
-      dark
-    >
+    <v-app-bar color="deep-purple accent-4" dark>
+
       <v-toolbar-title>RingUP</v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -11,11 +9,12 @@
       <v-btn v-if="user.loggedIn" icon @click="signOut">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
+
       <v-btn v-else icon @click="signIn">
         <v-icon>mdi-account</v-icon>
       </v-btn>
-    </v-app-bar>
 
+    </v-app-bar>
 
     <router-view/>
   </div>

@@ -1,17 +1,76 @@
 <template>
   <div class="home">
-    
-    <div class="my-2" @click="signIn">
-      <v-btn 
-        x-large 
-        color="success" 
-        dark>
-        Sign In
-      </v-btn>
-    </div>
+
+    <v-card
+      class="ru-card"
+      color="rgba(255, 255, 255, 60%)"
+      max-width="500px" >
+      
+      <v-list-item two-line>
+        <v-list-item-content>
+          <h1>RingUP</h1>
+          <h4>Modern Invoice Generator and Receipt Tracker</h4>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-card-actions class="ru-btn">
+        <v-btn
+          x-large 
+          color="success" 
+          dark
+          @click="signIn" >
+          Sign In
+        </v-btn>
+      </v-card-actions>
+    </v-card>
 
   </div>
 </template>
+
+<style>
+.home {
+  text-align: center;
+  background-image: linear-gradient( 135deg, #FFAA85 10%, #B3315F 100%);
+  height: 100vh;
+}
+
+.ru-card {
+  text-align: center;
+  display: inline-block;
+  margin-top: 10%;
+}
+
+.ru-btn {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+}
+
+.ru-btn:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  background: #2098D1;
+  height: 4px;
+  -webkit-transition-property: right;
+  transition-property: right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.ru-btn:hover:before, .ru-btn:focus:before, .ru-btn:active:before {
+  right: 0;
+}
+</style>
 
 <script>
 /*eslint-disable */
