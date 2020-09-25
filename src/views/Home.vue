@@ -1,19 +1,11 @@
 <template>
   <div class="home">
 
-    <v-card
-      class="ru-card"
-      color="rgba(255, 255, 255, 60%)"
-      max-width="500px" >
-      
-      <v-list-item two-line>
-        <v-list-item-content>
-          <h1>RingUP</h1>
-          <h4>Modern Invoice Generator and Receipt Tracker</h4>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-card-actions class="ru-btn">
+    <div class="ru-card">
+      <h1>RingUP</h1>
+      <h4>Modern Invoice Generator and Receipt Tracker</h4>
+      <br> <br>
+      <div class="ru-btn">
         <v-btn
           x-large 
           color="success" 
@@ -21,8 +13,8 @@
           @click="signIn" >
           Sign In
         </v-btn>
-      </v-card-actions>
-    </v-card>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -37,7 +29,10 @@
 .ru-card {
   text-align: center;
   display: inline-block;
-  margin-top: 10%;
+  padding: 50px;
+  margin: 50px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 60%);
 }
 
 .ru-btn {
