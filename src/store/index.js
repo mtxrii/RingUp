@@ -9,13 +9,18 @@ export default new Vuex.Store({
   state: {
     user: {
       loggedIn: false,
-      data: null,
+    },
+    data: {
+     
     }
   },
   plugins: [createPersistedState()],
   getters: {
     user(state) {
       return state.user
+    },
+    items(state) {
+      return state.data
     }
   },
   mutations: {
@@ -26,7 +31,7 @@ export default new Vuex.Store({
       state.user.uid = value;
     },
     setItemData(state, value){
-      state.user.data.itemData = value
+      state.data = value;
     }
   },
   actions: {
