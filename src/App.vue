@@ -2,7 +2,7 @@
   <div id="app">
     <v-app-bar color="deep-purple accent-4" dark>
 
-      <v-toolbar-title>RingUP</v-toolbar-title>
+      <v-toolbar-title style="font-family: 'Roboto', sans-serif">RingUP</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -91,3 +91,66 @@ export default {
 };
 /*eslint-enable */
 </script>
+
+<style>
+body {
+  text-align: center;
+  background-image: linear-gradient( 135deg, #FFAA85 10%, #B3315F 100%);
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+.ru-card {
+  text-align: center;
+  display: inline-block;
+  padding: 50px;
+  margin: 50px;
+  border-radius: 15%;
+  background-color: rgba(255, 255, 255, 60%);
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.2);
+}
+
+.ru-btn {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 3px;
+}
+
+.ru-btn:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  background: #b34b31;
+  height: 4px;
+  -webkit-transition-property: right;
+  transition-property: right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+
+.ru-btn:hover:before, .ru-btn:focus:before, .ru-btn:active:before {
+  right: 0;
+}
+
+.ru-head {
+  color: whitesmoke;
+  text-shadow: 1px 1px 3px black;
+  font-size: 300%;
+  margin: 30px;
+}
+
+.ru-head.ru-sub {
+  font-size: 200%;
+  margin: 20px;
+}
+</style>
