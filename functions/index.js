@@ -21,10 +21,38 @@ exports.addUser = functions.auth.user().onCreate((user) => {
   //add uid to the users collection
   async function setData() {
     await db.collection('users').doc(uid).set(userFields);
+    await db.collection('users').doc(uid).collection('txs').add({
+      receipt: {},
+      date: Date.now(),
+      number: 0,
+    });
+    await db.collection('users').doc(uid).collection('items').add({
+      icon: 3,
+      name: 'My-First-Item',
+      options: {
+        extra_sauce: true
+      }
+    });
   }
   setData();
   return 0;
 
+});
+
+//called when user is logged in
+//gets the items collection for each user
+exports.fetchItems = functions.https.onCall((data, context) => {
+
+  //reference to the items collection for a particular user
+  const itemsRef = db.collection('users').doc(data[0]).collection('items');
+
+  var items = {};
+
+  async function fetchRef(){
+    const snapshot = await itemsRef.get();
+    items = snapshot;
+  }
+  return items;
 });
 
 
