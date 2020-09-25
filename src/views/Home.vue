@@ -74,7 +74,8 @@ export default {
         fetchItems(vm.user.uid).then(result => {
           
           console.log(result.data);
-          // store.commit("setItemData", result.data);
+          
+          store.commit("setItemData", result.data);
         })
 
       }).catch(function(error) {
@@ -94,7 +95,7 @@ export default {
   },
 
   created() {
-    console.log(this.getUid());
+    
     if(this.user.loggedIn) {
       router.push("/account");
     }
