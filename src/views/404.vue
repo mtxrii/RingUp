@@ -1,6 +1,8 @@
 <template>
-  <div class="404 center">
-    <img src='../assets/undraw/404.svg' alt='404' />
+  <div class="404">
+    <img src='../assets/undraw/404.svg' alt='404' width="40%" style="padding-top: 50px;"/>
+
+    <div class="ru-head ru-sub">Sorry, theres nothing here.</div>
   </div>
 </template>
 
@@ -11,9 +13,5 @@ export default {
 </script>
 
 <style scoped>
-.center {
-  text-align: center;
-  padding-top: 50px;
-}
 
 </style>
