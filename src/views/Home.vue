@@ -74,7 +74,8 @@
 
 <script>
 /*eslint-disable */
-import * as firebase from "firebase/app";
+
+import firebase from "firebase";
 import firebaseui from "firebaseui";
 import router from "../router";
 import store from "../store";
@@ -100,16 +101,33 @@ export default {
 
   methods: {
     signIn: function(event){
+      var vm = this;
       firebase.auth().signInWithPopup(provider).then(function(result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         // The signed-in user info.
         var user = result.user;
-        store.state.user.loggedIn = true;
-
+    
         //set the user as logged-in in the state
         store.commit("setLoggedIn", true);
+
+        //update uid in state
+        store.commit("setUser", user.uid);
+
+
+
         router.push("/account");
+
+       
+        //fetch user items
+        var fetchItems = firebase.functions().httpsCallable("fetchItems");
+ 
+
+        fetchItems(vm.user.uid).then(result => {
+          
+          console.log(result.data);
+          // store.commit("setItemData", result.data);
+        })
 
       }).catch(function(error) {
         // Handle Errors here.
@@ -121,10 +139,14 @@ export default {
         var credential = error.credential;
         // ...
       });
+    },
+    getUid: function(){
+      return this.user.uid;
     }
   },
 
   created() {
+    console.log(this.getUid());
     if(this.user.loggedIn) {
       router.push("/account");
     }

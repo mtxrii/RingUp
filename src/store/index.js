@@ -22,6 +22,12 @@ export default new Vuex.Store({
     setLoggedIn(state, value) {
       state.user.loggedIn = value;
     },
+    setUser(state, value){
+      state.user.uid = value;
+    },
+    setItemData(state, value){
+      state.user.data.itemData = value
+    }
   },
   actions: {
   },

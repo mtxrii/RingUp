@@ -43,16 +43,24 @@ exports.addUser = functions.auth.user().onCreate((user) => {
 //gets the items collection for each user
 exports.fetchItems = functions.https.onCall((data, context) => {
 
+  console.log("fetchItems is run");
+
   //reference to the items collection for a particular user
-  const itemsRef = db.collection('users').doc(data[0]).collection('items');
+  
+  const itemsRef = db.collection('users').doc(data).collection('items');
+  
 
-  var items = {};
-
+  var items = [];
   async function fetchRef(){
     const snapshot = await itemsRef.get();
-    items = snapshot;
+    snapshot.forEach(doc => {
+      items.push({[doc.id]: doc.data()});
+    });
+    console.log(items);
+    return items;
   }
-  return items;
+  return fetchRef();
+
 });
 
 

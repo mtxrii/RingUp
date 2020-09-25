@@ -5,14 +5,15 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 
 import firebase from "firebase/app"
-import "firebase/database"
+// Required for side-effects
 
 import {firebaseConfig} from './config.js'
 
 Vue.config.productionTip = false
 
 firebase.initializeApp(firebaseConfig);
-// const db = firebase.database();
+
+
 
 new Vue({
   router,
