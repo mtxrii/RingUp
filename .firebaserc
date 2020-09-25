@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "ringup-1"
+    "default": "ringup-1",
+    "dev": "ringup-1"
   }
 }
