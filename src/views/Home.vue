@@ -94,6 +94,7 @@ export default {
   }),
   
   name: 'Home',
+  data: () => ({ drawer: null }),
   components: {
     
   },
