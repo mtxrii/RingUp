@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-app-bar color="deep-purple accent-4" dark>
+    <v-app-bar color="deep-purple accent-4" dark fixed>
 
       <v-toolbar-title style="font-family: 'Roboto', sans-serif">RingUP</v-toolbar-title>
 

@@ -114,7 +114,7 @@ export default {
 <style scoped>
 .ru-card.floating {
   position: absolute;
-  bottom: 40%;
+  bottom: 55%;
   right: 0;
   padding-left: 20px;
   padding-right: 20px;
