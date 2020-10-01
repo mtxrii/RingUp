@@ -14,6 +14,7 @@
         <v-icon>mdi-account</v-icon>
       </v-btn>
 
+
     </v-app-bar>
 
     <router-view/>
@@ -105,6 +106,7 @@ export default {
 </script>
 
 <style>
+
 
 .ru-card {
   text-align: center;
