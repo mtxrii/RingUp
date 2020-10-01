@@ -1,19 +1,23 @@
 <template>
   <div class="home">
 
-    <div class="ru-card">
-      <h1>RingUP</h1>
-      <h4>Modern Invoice Generator and Receipt Tracker</h4>
-      <br> <br>
-      <div class="ru-btn">
-        <v-btn
-          x-large 
-          color="success" 
-          dark
-          @click="signIn" >
-          <v-icon style="margin-right: 10px">mdi-google</v-icon>
-          Sign In
-        </v-btn>
+    <div class="ru-background" style="position: relative">
+      <v-img src="../assets/undraw/shopping_app.svg"> </v-img>
+
+      <div class="ru-card floating">
+        <h1>RingUP</h1>
+        <h4>Modern Invoice Generator and Receipt Tracker</h4>
+        <br> <br>
+        <div class="ru-btn">
+          <v-btn
+            x-large 
+            color="success" 
+            dark
+            @click="signIn" >
+            <v-icon style="margin-right: 10px">mdi-google</v-icon>
+            Sign In
+          </v-btn>
+        </div>
       </div>
     </div>
 
@@ -107,3 +111,12 @@ export default {
 /*eslint-enable */
 </script>
 
+<style scoped>
+.ru-card.floating {
+  position: absolute;
+  bottom: 40%;
+  right: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+</style>
