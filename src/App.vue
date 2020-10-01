@@ -93,12 +93,6 @@ export default {
 </script>
 
 <style>
-body {
-  text-align: center;
-  background-image: linear-gradient( 135deg, #FFAA85 10%, #B3315F 100%);
-  height: 100vh;
-  font-family: 'Roboto', sans-serif;
-}
 
 .ru-card {
   text-align: center;
