@@ -47,7 +47,7 @@
           <v-card-title class="headline">
             Create a new order by adding items
           </v-card-title>
-          <v-img src="../assets/undraw/selected_options.svg" width="40%" style="margin: 0 auto"></v-img>
+          <v-img src="../assets/undraw/selecting.svg" width="40%" style="margin: 0 auto"></v-img>
           <v-card-text class="body-1">
             Quickly and accurately add your customer's requests to their order. Easily customize items with the settings you've already determined, or add special notes.
           </v-card-text>
@@ -59,11 +59,11 @@
           <h2>3</h2>
         </template>
         
-        <v-card class="elevation-2" width="500" height="320">
+        <v-card class="elevation-2" width="500" height="360">
           <v-card-title class="headline">
             Analyze trends and data
           </v-card-title>
-          <v-img src="../assets/undraw/selected_options.svg" width="40%" style="margin: 0 auto"></v-img>
+          <v-img src="../assets/undraw/memory_storage.svg" width="40%" style="margin: 0 auto"></v-img>
           <v-card-text class="body-1">
             At checkout, a copy of the customer's receipt is saved for your reference, along with every past order. We then analyze your data and present trends on popular, frequent and oftenly modified products.
           </v-card-text>
