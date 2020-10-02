@@ -1,5 +1,5 @@
 <template>
-  <div class="account">
+  <div style = "padding-top: 70px;" class="account">
 
     <v-main class="grey lighten-3">
       <div style = "padding-left: 3vw; padding-right: 3vw">
@@ -13,35 +13,38 @@
             <v-card
               min-height="80vh"
               color="rgba(255,255,255,0.5)"
-              rounded
+              rounded 
             >
             
        
-              <v-container center  grid-list-md>
-                <v-layout align="center" justify="center" row wrap>
+              <v-container  grid-list-md>
+                <v-layout row wrap>
                   <v-flex
                   align="center"
                   justify="center"
                     md4
                     lg3
                     style="padding-top: 20px; padding-bottom: 20px"
-                  v-for="n in 100" v-bind:key="n"
+                 
+                  v-for="(item, key) in items" v-bind:key="key"
+                  
                   >
                   <v-card  
-                    justify="center"
-                    align="center"
                     class="mx-auto elevation-20"
                     color="rgba(255,255,255,0.5)"
                     dark
-                    style="max-width:200px; max-height:200px; min-width:200px; min-height:200px"
+                    style="max-width:200px; max-height:200px; min-width:200px; min-height:200px;
+                          justify-content: center; margin-left: 13%"
+                          
                   >
-                    <v-row justify="space-between">
+                    <v-row justify="center">
                       <v-col cols="8">
-                        <v-card-title primary-title>
-                          <div>
-                            <div style="font-weight: 500; color: black; word-break: normal;" v-text = "hello.itemName" class="headline"></div>
-                            <div style="font-weight: 300; color: black; word-break: normal;" v-text = "hello.desc"></div>
-                            <div style="font-weight: 300; color: black; word-break: normal;" v-text = "hello.desc"></div>
+                        <v-card-title>
+                          <div style = "color: black">
+                            
+                            {{item.Object}}
+                            <div style="font-weight: 500; color: black; word-break: normal;" v-text = "item" class="headline"></div>
+                            
                           </div>
                         </v-card-title>
                       </v-col>
@@ -108,19 +111,21 @@ export default {
   name: 'Account',
   data () {
     return {
-      hello: {
-        itemName: "Item Name",
-        desc: "item info"
-      }
+      items: []
     }
   },
+  mounted: function() {
+    
+      this.items = this.item_list;
+    
+  },
   computed: {
-    ...mapGetters({
+    ...mapGetters({ 
       user: "user",
-      items: "items"
+      item_list: "items"
     })
   },
-  
+
   methods: {
     signOut: function(event){
       firebase.auth().signOut().then(function() {
@@ -142,6 +147,8 @@ export default {
     if(!this.user.loggedIn) {
       router.push("/");
     }
+    console.log(this.item_list);
+    console.log(this.hello);
   },
 }
 
