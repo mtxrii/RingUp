@@ -176,7 +176,19 @@
 
               </div>
 
-              <div class="ru-btn" style="margin-right: 20px; margin-bottom: 10px">
+              
+            </v-card>
+
+            <v-card 
+            rounded
+            color="rgba(255,255,255,0.5)"
+            style="margin-top: 30px">
+
+              <div style="padding-top: 10px; padding-left: 12px; text-align: left">
+                <h3>Subtotal: ${{subtotal}}</h3>
+              </div>
+
+              <div class="ru-btn" style="margin-right: 20px; margin-bottom: 10px; margin-top: 10px">
                 <v-btn
                   small
                   color="red"
@@ -186,7 +198,7 @@
                 </v-btn>
               </div>
 
-              <div class="ru-btn" style="margin-bottom: 10px">
+              <div class="ru-btn" style="margin-bottom: 10px; margin-top: 10px">
                 <v-btn
                   small
                   color="green"
@@ -195,7 +207,7 @@
                   Checkout
                 </v-btn>
               </div>
-              
+
             </v-card>
           </v-col>
 
@@ -230,7 +242,8 @@ export default {
   data () {
     return {
       items: [],
-      currentItem: {}
+      currentItem: {},
+      subtotal: 0
     }
   },
 
@@ -267,12 +280,15 @@ export default {
     },
     addToOrder: function() {
       store.commit("addToOrder", this.currentItem)
+      this.subtotal += this.currentItem.price;
     },
     removeFromOrder: function(item) {
       store.commit("removeFromOrder", item);
+      this.subtotal -= this.item.price;
     },
     clearOrder: function() {
       store.commit('clearOrder');
+      this.subtotal = 0;
     },
 
     selectEmoji(emoji) {
