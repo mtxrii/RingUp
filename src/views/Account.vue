@@ -39,24 +39,21 @@
                   >
                     <v-row justify="center">
                       <v-col cols="12">
-                        <v-card-title>
-                          <div style = "color: black; text-align: center">
-                            
-                            <p></p>
-                            <div style="font-size: 25px; text-align:center; font-weight: 500; color: black; word-break: normal; padding-bottom: 20%" v-text = "item[0].name" class="headline"></div>
-                            <div style="font-size: 40px; font-weight: 500; color: black; word-break: normal;  padding-bottom: 20%" v-text = "item[0].icon" class="headline"></div>
-                            
+                        <v-card-title style = "color: black; ">
+                          {{item[0].name}}
+                        </v-card-title>
+                        <v-card-title style = "font-size: 30px; color: black; ">
+                          {{item[0].icon}}
+                        </v-card-title>
+                       
                               <v-btn
-                               
+                                color="black"
                                 elevation="2"
                                 icon
                                 outlined
                                 rounded
                               ><v-icon>mdi-wrench</v-icon></v-btn>
-                            
-                            
-                          </div>
-                        </v-card-title>
+                         
                       </v-col>
                     </v-row>
                   </v-card>
