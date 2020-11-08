@@ -118,22 +118,24 @@ export default {
   name: 'Account',
   data () {
     return {
-      items: []
+      items: [],
+      currentItem: {
+        id: 0,
+        icon: 129409,
+        name: 'JoeExotic',
+        options: {
+          extra_sauce: true
+        }
+      },
+      totalItems: 1
     }
   },
-  mounted: function() {
-    
-      // this.items = Object.values(this.item_list);
 
-      // for(let i=0; i<this.item_list.length; i++){
-      //   this.items[i] = Object.values(this.item_list[i]);
-      // }
-    
-  },
   computed: {
     ...mapGetters({ 
       user: "user",
-      item_list: "items"
+      item_list: "items",
+      queue: "current"
     })
   },
 
@@ -152,6 +154,19 @@ export default {
         console.log("sign out error");
       });
     },
+
+    openModal: function(item) {
+      this.currentItem = item
+      this.currentItem.id = this.totalItems
+    },
+    editCustom: function(key, val) {
+      this.currentItem.options[key] = val
+    },
+    addToOrder: function() {
+      store.commit("addToOrder", this.currentItem)
+      this.totalItems ++;
+    }
+
   },
 
   created() {
