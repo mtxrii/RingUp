@@ -15,7 +15,7 @@ export default new Vuex.Store({
     },
     currentOrder: [{
       id: 0,
-      icon: 129409,
+      icon: '🦁',
       name: 'JoeExotic',
       options: {
         extra_sauce: true

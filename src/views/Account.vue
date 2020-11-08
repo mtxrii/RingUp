@@ -83,10 +83,9 @@
             min-height="30vh">
 
             <div 
-            v-for="n in 5"
-            :key="n">
+            v-for="(item, key) in queue" v-bind:key="key">
                 
-                <p>&#129409; {{n}}  </p>
+                <p>{{item.icon}} {{item.name}}  </p>
 
               </div>
               
@@ -121,7 +120,7 @@ export default {
       items: [],
       currentItem: {
         id: 0,
-        icon: 129409,
+        icon: '🦁',
         name: 'JoeExotic',
         options: {
           extra_sauce: true
