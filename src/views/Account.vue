@@ -32,7 +32,7 @@
                  
                   <v-card  
                     
-                    class="mx-auto elevation-20;"
+                    class="mx-auto elevation-20"
                     color="rgba(255,255,255,0.5)"
                     dark
                     style="max-width:200px; max-height:200px; min-width:200px; min-height:200px;
@@ -41,12 +41,14 @@
                   >
                     <v-row justify="center">
                       <v-col cols="12">
-                        <v-card-title style = "color: black;">
-                          {{item[0].name}}
-                        </v-card-title>
-                        <v-card-title style = "font-size: 45px; color: black; ">
-                          {{item[0].icon}}
-                        </v-card-title>
+                        <div v-on:click="openModal(item[0])">
+                          <v-card-title style = "color: black;">
+                            {{item[0].name}}
+                          </v-card-title>
+                          <v-card-title style = "font-size: 45px; color: black; ">
+                            {{item[0].icon}}
+                          </v-card-title>
+                        </div>
                        
                               <v-btn
                                 color="black"
@@ -234,6 +236,7 @@ export default {
     openModal: function(item) {
       this.currentItem = item
       this.currentItem.id = this.totalItems
+      this.addToOrder()
     },
     editCustom: function(key, val) {
       this.currentItem.options[key] = val
