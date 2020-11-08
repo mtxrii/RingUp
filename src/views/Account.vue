@@ -1,6 +1,6 @@
 <template>
   <div style = "padding-top: 70px;" class="account">
-
+     
     <v-main class="grey lighten-3; newBackground">
       <div style = "padding-left: 3vw; padding-right: 3vw">
       <v-container 
@@ -119,7 +119,7 @@
                           <v-card-text>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                           </v-card-text>
-
+                          <VEmojiPicker @select="selectEmoji" />
                           <v-divider></v-divider>
 
                           <v-card-actions>
@@ -181,12 +181,17 @@ import createPersistedState from "vuex-persistedstate";
 import store from '../store'
 import router from "../router";
 import { mapGetters } from "vuex";
+import { VEmojiPicker } from 'v-emoji-picker';
+
 
 // @ is an alias to /src
 
 
 export default {
   name: 'Account',
+   components: {
+    VEmojiPicker
+  },
   data () {
     return {
       items: [],
@@ -236,6 +241,10 @@ export default {
     addToOrder: function() {
       store.commit("addToOrder", this.currentItem)
       this.totalItems ++;
+    },
+    
+    selectEmoji(emoji) {
+      console.log(emoji)
     }
 
   },
