@@ -17,7 +17,7 @@
             >
             
        
-              <v-container  grid-list-md>
+              <v-container grid-list-md>
                 <v-layout row wrap>
                   <v-flex
                   align="center"
@@ -25,11 +25,11 @@
                     md4
                     lg3
                     style="padding-top: 20px; padding-bottom: 20px"
-                 
+                    
                   v-for="(item, key) in items" v-bind:key="key"
                   
                   >
-                 
+                  
                   <v-card  
                     
                     class="mx-auto elevation-20"
@@ -49,18 +49,99 @@
                             {{item[0].icon}}
                           </v-card-title>
                         </div>
-                       
+                            <v-dialog
+                            width="500"
+                          >
+                            <template v-slot:activator="{ on }">
+                 
                               <v-btn
+                                v-on="on"
                                 color="black"
                                 elevation="2"
                                 icon
                                 outlined
                                 rounded
                               ><v-icon>mdi-wrench</v-icon></v-btn>
+                              </template>
+
+                              <v-card>
+                          <v-card-title class="headline grey lighten-2">
+                           Edit Item Details
+                          </v-card-title>
+                          <v-container>
+                          <v-row>
+                          <v-col
+                              cols="12"
+                              sm="6"
+                            >
+                              <v-card-text style="font-size: 22px">Edit Name:</v-card-text>
+                            </v-col>
+                            <v-col
+                              cols="12"
+                              sm="6"
+                            >
+                            <v-text-field v-model="item[0].name" ></v-text-field>
+                              
+                            </v-col>
+
+                            <v-col
+                              cols="12"
+                              sm="6"
+                            >
+                          <v-card-text style="font-size: 22px">Edit Price:</v-card-text>
+                              </v-col>
+                              <v-col
+                                cols="12"
+                                sm="6"
+                              >
+                              <v-text-field
+                                  v-model="item[0].price"
+                                  type="number"
+                                  prefix="$"
+                                ></v-text-field>
+                                
+                              </v-col>
+              
+           
+                              <v-col
+                                cols="12"
+                                sm="6"
+                              >
+                                <v-card-text style="font-size: 22px">Edit Icon:</v-card-text>
+                              </v-col>
+                              <v-col
+                                cols="12"
+                                sm="6"
+                              >
+                              <v-text-field readonly v-model="item[0].icon"></v-text-field>
+                                
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                          <v-card-text>
+                          </v-card-text>
+                          <VEmojiPicker @select="selectEmoji" />
+                          <v-divider></v-divider>
+ 
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              color="red"
+                              text
+                             
+                              @click="edit(key); dialog=false"
+                            >
+                              Save
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                            </v-dialog>
                          
                       </v-col>
                     </v-row>
                   </v-card>
+
+                   
 
 
               </v-flex>
@@ -117,21 +198,70 @@
                           <v-card-title class="headline grey lighten-2">
                             New Item
                           </v-card-title>
+                          <v-container>
+            <v-row>
+             <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-card-text style="font-size: 22px">Item Name:</v-card-text>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+              <v-text-field v-model="currentName" ></v-text-field>
+                
+              </v-col>
 
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-card-text style="font-size: 22px">Item Price:</v-card-text>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+              <v-text-field
+                  v-model="currentPrice"
+                  type="number"
+                  prefix="$"
+                ></v-text-field>
+                
+              </v-col>
+              
+           
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-card-text style="font-size: 22px">Choose an Icon:</v-card-text>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+              <v-text-field readonly v-model="currentEmoji"></v-text-field>
+                
+              </v-col>
+            </v-row>
+          </v-container>
                           <v-card-text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                           </v-card-text>
                           <VEmojiPicker @select="selectEmoji" />
                           <v-divider></v-divider>
-
+ 
                           <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn
-                              color="primary"
+                              color="red"
                               text
-                              @click="dialog = false"
+                             
+                              @click="addItem();"
                             >
-                              I accept
+                              Save
                             </v-btn>
                           </v-card-actions>
                         </v-card>
@@ -243,7 +373,11 @@ export default {
     return {
       items: [],
       currentItem: {},
-      subtotal: 0
+      subtotal: 0,
+      currentEmoji: "",
+      currentName: "",
+      currentPrice: 0,
+      dialog: false
     }
   },
 
@@ -252,7 +386,10 @@ export default {
       user: "user",
       item_list: "items",
       queue: "current"
-    })
+    }),
+    listUpdates (){
+      return this.items;
+    }
   },
 
   methods: {
@@ -292,25 +429,77 @@ export default {
     },
 
     selectEmoji(emoji) {
-      console.log(emoji)
+      this.currentEmoji = emoji.data;
     },
-    gotoReceipt() {
-      router.push("/receipt");
-    }
+    methodThatForcesUpdate() {
+      // ...
+      this.$forceUpdate();
+    },
+    addNewItem: function(){
+      var vm = this;
+      console.log("ADDING NEW ITEM");
+      
+      let dataToPush = {name: this.currentName, emoji: this.currentEmoji, price: this.currentPrice, uid: this.user.uid};
 
+      var addItem = firebase.functions().httpsCallable("addItem");
+      this.dialog = false;
+
+        addItem(dataToPush).then(result => {
+          var fetchItems = firebase.functions().httpsCallable("fetchItems");
+
+          fetchItems(vm.user.uid).then(result => {
+    
+            store.commit("setItemData", result.data);
+          
+            for(let i=0; i<vm.item_list.length; i++){
+              this.items[i] = Object.values(vm.item_list[i]);
+            }
+            this.methodThatForcesUpdate();
+          })         
+        })
+    },
+    edit: function(index){
+      var vm = this;
+      console.log("EDIT ITEM");
+
+
+      console.log(index);
+      console.log(vm.items[index][0].name);
+      let itemId = Object.keys(this.item_list[index]);
+
+      let dataToPush = {name: this.items[index][0].name, emoji: this.items[index][0].icon, price: this.items[index][0].price, uid: vm.user.uid, id: itemId}
+      console.log(dataToPush);
+      var editItem = firebase.functions().httpsCallable("editItem");
+
+      editItem(dataToPush).then(result => {
+        var fetchItems = firebase.functions().httpsCallable("fetchItems");
+
+          fetchItems(vm.user.uid).then(result => {
+    
+            store.commit("setItemData", result.data);
+          
+            for(let i=0; i<vm.item_list.length; i++){
+              this.items[i] = Object.values(vm.item_list[i]);
+            }
+            this.methodThatForcesUpdate();
+          })         
+      })
+
+    }
+    
   },
 
   created() {
+    
     if(!this.user.loggedIn) {
       router.push("/");
     }
-    // console.log(Object.values(this.item_list[0]));
-    // // console.log(this.item_list[0][0]);
+
     for(let i=0; i<this.item_list.length; i++){
       this.items[i] = Object.values(this.item_list[i]);
     }
     console.log(this.items);
-    console.log(this.hello);
+    
   },
 }
 
