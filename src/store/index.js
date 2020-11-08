@@ -10,6 +10,7 @@ export default new Vuex.Store({
     user: {
       loggedIn: false,
     },
+    totalOrders: 350,
     data: {
      
     },
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     current(state) {
       return state.currentOrder
+    },
+    totalOrders(state) {
+      return state.totalOrders
     }
   },
   mutations: {

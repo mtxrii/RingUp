@@ -202,7 +202,7 @@
                 <v-btn
                   small
                   color="green"
-                  @click="clearOrder()" >
+                  @click="gotoReceipt" >
                   <v-icon style="margin-right: 10px">mdi-check</v-icon>
                   Checkout
                 </v-btn>
@@ -293,6 +293,9 @@ export default {
 
     selectEmoji(emoji) {
       console.log(emoji)
+    },
+    gotoReceipt() {
+      router.push("/receipt");
     }
 
   },

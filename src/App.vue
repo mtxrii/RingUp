@@ -1,7 +1,7 @@
 <template>
 <v-app>
   <div id="app" class="newBackground">
-    <v-app-bar  dark fixed>
+    <v-app-bar dark fixed v-if="$route.name != 'Receipt'">
 
       <v-toolbar-title style="font-family: 'Roboto', sans-serif">RingUP</v-toolbar-title>
 
