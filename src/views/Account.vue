@@ -29,7 +29,7 @@
                   v-for="(item, key) in items" v-bind:key="key"
                   
                   >
-                 
+                  
                   <v-card  
                     
                     class="mx-auto elevation-20"
@@ -49,18 +49,99 @@
                             {{item[0].icon}}
                           </v-card-title>
                         </div>
-                       
+                            <v-dialog
+                            width="500"
+                          >
+                            <template v-slot:activator="{ on }">
+                 
                               <v-btn
+                                v-on="on"
                                 color="black"
                                 elevation="2"
                                 icon
                                 outlined
                                 rounded
                               ><v-icon>mdi-wrench</v-icon></v-btn>
+                              </template>
+
+                              <v-card>
+                          <v-card-title class="headline grey lighten-2">
+                           Edit Item Details
+                          </v-card-title>
+                          <v-container>
+                          <v-row>
+                          <v-col
+                              cols="12"
+                              sm="6"
+                            >
+                              <v-card-text style="font-size: 22px">Edit Name:</v-card-text>
+                            </v-col>
+                            <v-col
+                              cols="12"
+                              sm="6"
+                            >
+                            <v-text-field v-model="item[0].name" ></v-text-field>
+                              
+                            </v-col>
+
+                            <v-col
+                              cols="12"
+                              sm="6"
+                            >
+                          <v-card-text style="font-size: 22px">Edit Price:</v-card-text>
+                              </v-col>
+                              <v-col
+                                cols="12"
+                                sm="6"
+                              >
+                              <v-text-field
+                                  v-model="item[0].price"
+                                  type="number"
+                                  prefix="$"
+                                ></v-text-field>
+                                
+                              </v-col>
+              
+           
+                              <v-col
+                                cols="12"
+                                sm="6"
+                              >
+                                <v-card-text style="font-size: 22px">Edit Icon:</v-card-text>
+                              </v-col>
+                              <v-col
+                                cols="12"
+                                sm="6"
+                              >
+                              <v-text-field readonly v-model="item[0].icon"></v-text-field>
+                                
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                          <v-card-text>
+                          </v-card-text>
+                          <VEmojiPicker @select="selectEmoji" />
+                          <v-divider></v-divider>
+ 
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              color="red"
+                              text
+                             
+                              @click="edit(key); dialog=false"
+                            >
+                              Save
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                            </v-dialog>
                          
                       </v-col>
                     </v-row>
                   </v-card>
+
+                   
 
 
               </v-flex>
@@ -178,7 +259,7 @@
                               color="red"
                               text
                              
-                              @click="addNewItem(); dialog=false"
+                              @click="addItem();"
                             >
                               Save
                             </v-btn>
@@ -360,7 +441,6 @@ export default {
       
       let dataToPush = {name: this.currentName, emoji: this.currentEmoji, price: this.currentPrice, uid: this.user.uid};
 
-      console.log(dataToPush);
       var addItem = firebase.functions().httpsCallable("addItem");
       this.dialog = false;
 
@@ -378,6 +458,34 @@ export default {
           })         
         })
     },
+    edit: function(index){
+      var vm = this;
+      console.log("EDIT ITEM");
+
+
+      console.log(index);
+      console.log(vm.items[index][0].name);
+      let itemId = Object.keys(this.item_list[index]);
+
+      let dataToPush = {name: this.items[index][0].name, emoji: this.items[index][0].icon, price: this.items[index][0].price, uid: vm.user.uid, id: itemId}
+      console.log(dataToPush);
+      var editItem = firebase.functions().httpsCallable("editItem");
+
+      editItem(dataToPush).then(result => {
+        var fetchItems = firebase.functions().httpsCallable("fetchItems");
+
+          fetchItems(vm.user.uid).then(result => {
+    
+            store.commit("setItemData", result.data);
+          
+            for(let i=0; i<vm.item_list.length; i++){
+              this.items[i] = Object.values(vm.item_list[i]);
+            }
+            this.methodThatForcesUpdate();
+          })         
+      })
+
+    }
     
   },
 
@@ -386,13 +494,12 @@ export default {
     if(!this.user.loggedIn) {
       router.push("/");
     }
-    // console.log(Object.values(this.item_list[0]));
-    // // console.log(this.item_list[0][0]);
+
     for(let i=0; i<this.item_list.length; i++){
       this.items[i] = Object.values(this.item_list[i]);
     }
     console.log(this.items);
-    console.log(this.hello);
+    
   },
 }
 

@@ -77,7 +77,20 @@ exports.addItem = functions.https.onCall((data, context) => {
   }
   setData();
   return 0;
+})
 
+exports.editItem = functions.https.onCall((data, context) => {
+  console.log(data.id);
+  console.log(data.id[0]);
+  async function setData() {
+    await db.collection('users').doc(data.uid).collection('items').doc(data.id[0]).set({
+      icon: data.emoji,
+      name: data.name,
+      price: data.price
+    });
+  }
+  setData();
+  return 0;
 
 })
 
