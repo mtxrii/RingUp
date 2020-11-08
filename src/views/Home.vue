@@ -65,7 +65,7 @@
           </v-card-title>
           <v-img src="../assets/undraw/memory_storage.svg" width="40%" style="margin: 0 auto"></v-img>
           <v-card-text class="body-1">
-            At checkout, a copy of the customer's receipt is saved for your reference, along with every past order. We then analyze your data and present trends on popular, frequent and oftenly modified products.
+            At checkout, a copy of the customer's receipt is saved for your reference, along with every past order. We then analyze your data and present trends on popular, frequent and most often modified products.
           </v-card-text>
           
         </v-card>
