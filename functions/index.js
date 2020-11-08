@@ -27,8 +27,9 @@ exports.addUser = functions.auth.user().onCreate((user) => {
       number: 0,
     });
     await db.collection('users').doc(uid).collection('items').add({
-      icon: 3,
+      icon: '🍔',
       name: 'My-First-Item',
+      price: 14,
       options: {
         extra_sauce: true
       }

@@ -13,14 +13,7 @@ export default new Vuex.Store({
     data: {
      
     },
-    currentOrder: [{
-      id: 0,
-      icon: '🦁',
-      name: 'JoeExotic',
-      options: {
-        extra_sauce: true
-      }
-    }]
+    currentOrder: []
   },
   plugins: [createPersistedState()],
   getters: {
@@ -38,23 +31,27 @@ export default new Vuex.Store({
     setLoggedIn(state, value) {
       state.user.loggedIn = value;
     },
-    setUser(state, value){
+    setUser(state, value) {
       state.user.uid = value;
     },
-    setItemData(state, value){
+    setItemData(state, value) {
       state.data = value;
     },
 
-    addToOrder(state, value){
+    addToOrder(state, value) {
       state.currentOrder.push(value);
     },
-    removeFromOrder(state, value){
+    removeFromOrder(state, value) {
       for (let i = state.currentOrder.length; i >= 0; i--) {
-        if (state.currentOrder[i].id === value.id) {
+        if (state.currentOrder[i] === value) {
           state.currentOrder.splice(i, 1);
           break;
         }
       }
+    },
+
+    clearOrder(state) {
+      state.currentOrder = [];
     }
   },
   actions: {
