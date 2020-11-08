@@ -17,7 +17,7 @@
             >
             
        
-              <v-container  grid-list-md>
+              <v-container grid-list-md>
                 <v-layout row wrap>
                   <v-flex
                   align="center"
@@ -25,7 +25,7 @@
                     md4
                     lg3
                     style="padding-top: 20px; padding-bottom: 20px"
-                 
+                    
                   v-for="(item, key) in items" v-bind:key="key"
                   
                   >
@@ -117,21 +117,70 @@
                           <v-card-title class="headline grey lighten-2">
                             New Item
                           </v-card-title>
+                          <v-container>
+            <v-row>
+             <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-card-text style="font-size: 22px">Item Name:</v-card-text>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+              <v-text-field v-model="currentName" ></v-text-field>
+                
+              </v-col>
 
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-card-text style="font-size: 22px">Item Price:</v-card-text>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+              <v-text-field
+                  v-model="currentPrice"
+                  type="number"
+                  prefix="$"
+                ></v-text-field>
+                
+              </v-col>
+              
+           
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-card-text style="font-size: 22px">Choose an Icon:</v-card-text>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+              <v-text-field readonly v-model="currentEmoji"></v-text-field>
+                
+              </v-col>
+            </v-row>
+          </v-container>
                           <v-card-text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                           </v-card-text>
                           <VEmojiPicker @select="selectEmoji" />
                           <v-divider></v-divider>
-
+ 
                           <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn
-                              color="primary"
+                              color="red"
                               text
-                              @click="dialog = false"
+                             
+                              @click="addNewItem(); dialog=false"
                             >
-                              I accept
+                              Save
                             </v-btn>
                           </v-card-actions>
                         </v-card>
@@ -205,7 +254,11 @@ export default {
           extra_sauce: true
         }
       },
-      totalItems: 1
+      totalItems: 1,
+      currentEmoji: "",
+      currentName: "",
+      currentPrice: 0,
+      dialog: false
     }
   },
 
@@ -214,7 +267,10 @@ export default {
       user: "user",
       item_list: "items",
       queue: "current"
-    })
+    }),
+    listUpdates (){
+      return this.items;
+    }
   },
 
   methods: {
@@ -247,12 +303,41 @@ export default {
     },
     
     selectEmoji(emoji) {
-      console.log(emoji)
-    }
+      this.currentEmoji = emoji.data;
+    },
+    methodThatForcesUpdate() {
+      // ...
+      this.$forceUpdate();
+    },
+    addNewItem: function(){
+      var vm = this;
+      console.log("ADDING NEW ITEM");
+      
+      let dataToPush = {name: this.currentName, emoji: this.currentEmoji, price: this.currentPrice, uid: this.user.uid};
 
+      console.log(dataToPush);
+      var addItem = firebase.functions().httpsCallable("addItem");
+      this.dialog = false;
+
+        addItem(dataToPush).then(result => {
+          var fetchItems = firebase.functions().httpsCallable("fetchItems");
+
+          fetchItems(vm.user.uid).then(result => {
+    
+            store.commit("setItemData", result.data);
+          
+            for(let i=0; i<vm.item_list.length; i++){
+              this.items[i] = Object.values(vm.item_list[i]);
+            }
+            this.methodThatForcesUpdate();
+          })         
+        })
+    },
+    
   },
 
   created() {
+    
     if(!this.user.loggedIn) {
       router.push("/");
     }

@@ -47,8 +47,9 @@ exports.fetchItems = functions.https.onCall((data, context) => {
 
   //reference to the items collection for a particular user
   
-  const itemsRef = db.collection('users').doc(data).collection('items');
   
+  const itemsRef = db.collection('users').doc(data).collection('items');
+
 
   var items = [];
   async function fetchRef(){
@@ -62,6 +63,22 @@ exports.fetchItems = functions.https.onCall((data, context) => {
   return fetchRef();
 
 });
+
+exports.addItem = functions.https.onCall((data, context) => {
+
+  
+  async function setData() {
+    await db.collection('users').doc(data.uid).collection('items').add({
+      icon: data.emoji,
+      name: data.name,
+      price: data.price
+    });
+  }
+  setData();
+  return 0;
+
+
+})
 
 
 
