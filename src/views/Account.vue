@@ -47,7 +47,7 @@
                             <div style="font-size: 40px; font-weight: 500; color: black; word-break: normal;  padding-bottom: 20%" v-text = "item[0].icon" class="headline"></div>
                             
                               <v-btn
-                                
+                               
                                 elevation="2"
                                 icon
                                 outlined
@@ -128,9 +128,9 @@ export default {
     
       // this.items = Object.values(this.item_list);
 
-      for(let i=0; i<this.item_list.length; i++){
-        this.items[i] = Object.values(this.item_list[i]);
-      }
+      // for(let i=0; i<this.item_list.length; i++){
+      //   this.items[i] = Object.values(this.item_list[i]);
+      // }
     
   },
   computed: {
@@ -163,7 +163,9 @@ export default {
     }
     // console.log(Object.values(this.item_list[0]));
     // // console.log(this.item_list[0][0]);
-
+    for(let i=0; i<this.item_list.length; i++){
+      this.items[i] = Object.values(this.item_list[i]);
+    }
     console.log(this.items);
     console.log(this.hello);
   },
