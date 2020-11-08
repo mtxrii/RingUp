@@ -38,12 +38,22 @@
                           
                   >
                     <v-row justify="center">
-                      <v-col cols="8">
+                      <v-col cols="12">
                         <v-card-title>
-                          <div style = "color: black">
+                          <div style = "color: black; text-align: center">
                             
-                            {{item.Object}}
-                            <div style="font-weight: 500; color: black; word-break: normal;" v-text = "item" class="headline"></div>
+                            <p></p>
+                            <div style="font-size: 25px; text-align:center; font-weight: 500; color: black; word-break: normal; padding-bottom: 20%" v-text = "item[0].name" class="headline"></div>
+                            <div style="font-size: 40px; font-weight: 500; color: black; word-break: normal;  padding-bottom: 20%" v-text = "item[0].icon" class="headline"></div>
+                            
+                              <v-btn
+                                
+                                elevation="2"
+                                icon
+                                outlined
+                                rounded
+                              ><v-icon>mdi-wrench</v-icon></v-btn>
+                            
                             
                           </div>
                         </v-card-title>
@@ -116,7 +126,11 @@ export default {
   },
   mounted: function() {
     
-      this.items = this.item_list;
+      // this.items = Object.values(this.item_list);
+
+      for(let i=0; i<this.item_list.length; i++){
+        this.items[i] = Object.values(this.item_list[i]);
+      }
     
   },
   computed: {
@@ -147,7 +161,10 @@ export default {
     if(!this.user.loggedIn) {
       router.push("/");
     }
-    console.log(this.item_list);
+    // console.log(Object.values(this.item_list[0]));
+    // // console.log(this.item_list[0][0]);
+
+    console.log(this.items);
     console.log(this.hello);
   },
 }

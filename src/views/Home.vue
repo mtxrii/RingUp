@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" style="margin-top: 300px">
 
     <div class="ru-background" style="position: relative">
       <v-img src="../assets/undraw/shopping_app.svg"> </v-img>
@@ -21,34 +21,53 @@
       </div>
     </div>
 
-    <v-timeline
-      align-top
-      :dense="$vuetify.breakpoint.smAndDown"
-    >
-      <v-timeline-item
-        v-for="(item, i) in items"
-        :key="i"
-        :color="item.color"
-        :icon="item.icon"
-        fill-dot
-      >
-        <v-card
-          :color="item.color"
-          dark
-        >
-          <v-card-title class="title">
-            Lorem Ipsum Dolor
+    <v-timeline style="margin: 10%; margin-top: -10%" align-top>
+      <v-timeline-item large>
+        <template v-slot:icon>
+          <h2>1</h2>
+        </template>
+        
+        <v-card class="elevation-2" width="500" height="300">
+          <v-card-title class="headline">
+            Add your items for sale
           </v-card-title>
-          <v-card-text class="white text--primary">
-            <p>Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.</p>
-            <v-btn
-              :color="item.color"
-              class="mx-0"
-              outlined
-            >
-              Button
-            </v-btn>
+          <v-img src="../assets/undraw/selected_options.svg" width="40%" style="margin: 0 auto"></v-img>
+          <v-card-text class="body-1">
+            Add any product to your menu and assign an emoji to it. Customize price, options and notes.
           </v-card-text>
+        </v-card>
+      </v-timeline-item>
+      
+      <v-timeline-item large>
+        <template v-slot:icon>
+          <h2>2</h2>
+        </template>
+        
+        <v-card class="elevation-2" width="500" height="320">
+          <v-card-title class="headline">
+            Create a new order by adding items
+          </v-card-title>
+          <v-img src="../assets/undraw/selecting.svg" width="40%" style="margin: 0 auto"></v-img>
+          <v-card-text class="body-1">
+            Quickly and accurately add your customer's requests to their order. Easily customize items with the settings you've already determined, or add special notes.
+          </v-card-text>
+        </v-card>
+      </v-timeline-item>
+      
+      <v-timeline-item large>
+        <template v-slot:icon>
+          <h2>3</h2>
+        </template>
+        
+        <v-card class="elevation-2" width="500" height="360">
+          <v-card-title class="headline">
+            Analyze trends and data
+          </v-card-title>
+          <v-img src="../assets/undraw/memory_storage.svg" width="40%" style="margin: 0 auto"></v-img>
+          <v-card-text class="body-1">
+            At checkout, a copy of the customer's receipt is saved for your reference, along with every past order. We then analyze your data and present trends on popular, frequent and oftenly modified products.
+          </v-card-text>
+          
         </v-card>
       </v-timeline-item>
     </v-timeline>
@@ -72,27 +91,6 @@ provider.setCustomParameters({
 });
 
 export default {
-  data: () => ({
-    items: [
-      {
-        color: 'red lighten-2',
-        icon: 'mdi-star',
-      },
-      {
-        color: 'purple darken-1',
-        icon: 'mdi-book-variant',
-      },
-      {
-        color: 'green lighten-1',
-        icon: 'mdi-airballoon',
-      },
-      {
-        color: 'indigo',
-        icon: 'mdi-buffer',
-      },
-    ],
-  }),
-  
   name: 'Home',
   data: () => ({ drawer: null }),
   components: {
@@ -169,8 +167,6 @@ export default {
 .ru-card.floating {
   position: absolute;
   bottom: 55%;
-  right: 0;
-  padding-left: 20px;
-  padding-right: 20px;
+  left: 60%;
 }
 </style>
