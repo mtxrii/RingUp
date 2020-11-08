@@ -332,7 +332,7 @@
                 <v-btn
                   small
                   color="green"
-                  @click="gotoReceipt" >
+                  @click="router.push('/receipt')" >
                   <v-icon style="margin-right: 10px">mdi-check</v-icon>
                   Checkout
                 </v-btn>
