@@ -205,13 +205,58 @@
             color="rgba(255,255,255,0.5)"
             min-height="30vh">
 
-            <div 
-            v-for="(item, key) in queue" v-bind:key="key">
-                
-                <p>{{item.icon}} {{item.name}}  </p>
+              <div v-for="(item, key) in queue" v-bind:key="key">
+                  
+                <div style="text-align: left">
+                  {{item.icon}} {{item.name}}
+                </div>
+                <div style="text-align: right; margin-top: -23px; margin-bottom: 5px; margin-right: 3px">
+                  ${{item.price}}
+                  <v-btn style="margin-left: 2px"
+                    v-on:click="removeFromOrder(item)"
+                    color="black"
+                    elevation="2"
+                    icon
+                    outlined
+                    rounded
+                    small
+                  ><v-icon small>mdi-delete</v-icon></v-btn>
+                </div>
 
               </div>
+
               
+            </v-card>
+
+            <v-card 
+            rounded
+            color="rgba(255,255,255,0.5)"
+            style="margin-top: 30px">
+
+              <div style="padding-top: 10px; padding-left: 12px; text-align: left">
+                <h3>Subtotal: ${{subtotal}}</h3>
+              </div>
+
+              <div class="ru-btn" style="margin-right: 20px; margin-bottom: 10px; margin-top: 10px">
+                <v-btn
+                  small
+                  color="red"
+                  @click="clearOrder()" >
+                  <v-icon style="margin-right: 10px">mdi-delete-sweep</v-icon>
+                  clear
+                </v-btn>
+              </div>
+
+              <div class="ru-btn" style="margin-bottom: 10px; margin-top: 10px">
+                <v-btn
+                  small
+                  color="green"
+                  @click="clearOrder()" >
+                  <v-icon style="margin-right: 10px">mdi-check</v-icon>
+                  Checkout
+                </v-btn>
+              </div>
+
             </v-card>
           </v-col>
 
@@ -246,15 +291,8 @@ export default {
   data () {
     return {
       items: [],
-      currentItem: {
-        id: 0,
-        icon: '🦁',
-        name: 'JoeExotic',
-        options: {
-          extra_sauce: true
-        }
-      },
-      totalItems: 1,
+      currentItem: {},
+      subtotal: 0,
       currentEmoji: "",
       currentName: "",
       currentPrice: 0,
@@ -291,7 +329,6 @@ export default {
 
     openModal: function(item) {
       this.currentItem = item
-      this.currentItem.id = this.totalItems
       this.addToOrder()
     },
     editCustom: function(key, val) {
@@ -299,9 +336,17 @@ export default {
     },
     addToOrder: function() {
       store.commit("addToOrder", this.currentItem)
-      this.totalItems ++;
+      this.subtotal += this.currentItem.price;
     },
-    
+    removeFromOrder: function(item) {
+      store.commit("removeFromOrder", item);
+      this.subtotal -= this.item.price;
+    },
+    clearOrder: function() {
+      store.commit('clearOrder');
+      this.subtotal = 0;
+    },
+
     selectEmoji(emoji) {
       this.currentEmoji = emoji.data;
     },
