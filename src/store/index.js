@@ -12,7 +12,15 @@ export default new Vuex.Store({
     },
     data: {
      
-    }
+    },
+    currentOrder: [{
+      id: 0,
+      icon: '🦁',
+      name: 'JoeExotic',
+      options: {
+        extra_sauce: true
+      }
+    }]
   },
   plugins: [createPersistedState()],
   getters: {
@@ -21,6 +29,9 @@ export default new Vuex.Store({
     },
     items(state) {
       return state.data
+    },
+    current(state) {
+      return state.currentOrder
     }
   },
   mutations: {
@@ -32,6 +43,18 @@ export default new Vuex.Store({
     },
     setItemData(state, value){
       state.data = value;
+    },
+
+    addToOrder(state, value){
+      state.currentOrder.push(value);
+    },
+    removeFromOrder(state, value){
+      for (let i = state.currentOrder.length; i >= 0; i--) {
+        if (state.currentOrder[i].id === value.id) {
+          state.currentOrder.splice(i, 1);
+          break;
+        }
+      }
     }
   },
   actions: {
