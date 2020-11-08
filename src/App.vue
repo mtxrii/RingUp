@@ -1,6 +1,7 @@
 <template>
-  <div id="app">
-    <v-app-bar color="deep-purple accent-4" dark fixed>
+<v-app>
+  <div id="app" class="newBackground">
+    <v-app-bar  dark fixed>
 
       <v-toolbar-title style="font-family: 'Roboto', sans-serif">RingUP</v-toolbar-title>
 
@@ -18,7 +19,9 @@
     </v-app-bar>
 
     <router-view/>
+    
   </div>
+</v-app>
 </template>
 
 <script>
@@ -166,4 +169,11 @@ export default {
   font-size: 200%;
   margin: 20px;
 }
+
+.newBackground {
+        text-align: center;
+        background-image: linear-gradient( 135deg, #FFAA85 10%, #B3315F 100%);
+        height: 100%;
+        font-family: 'Roboto', sans-serif;
+      }
 </style>

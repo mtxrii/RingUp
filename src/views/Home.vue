@@ -11,7 +11,7 @@
         <div class="ru-btn">
           <v-btn
             x-large 
-            color="success" 
+            
             dark
             @click="signIn" >
             <v-icon style="margin-right: 10px">mdi-google</v-icon>
