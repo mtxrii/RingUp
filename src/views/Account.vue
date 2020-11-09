@@ -42,15 +42,16 @@
                     <v-row justify="center">
                       <v-col cols="12">
                         <div v-on:click="openModal(item[0])">
-                          <v-card-title style = "color: black;">
-                            {{item[0].name}}
+                          <v-card-title class= "text-no-wrap" style = "color: black;">
+                            {{item[0].name | truncate(16, '...')}}
                           </v-card-title>
-                          <v-card-title style = "font-size: 45px; color: black; ">
+                          <v-card-title style = "font-size: 45px; text-align: center; color: black; ">
                             {{item[0].icon}}
                           </v-card-title>
                         </div>
                             <v-dialog
                             width="500"
+                             
                           >
                             <template v-slot:activator="{ on }">
                  
@@ -113,7 +114,7 @@
                                 cols="12"
                                 sm="6"
                               >
-                              <v-text-field readonly v-model="item[0].icon"></v-text-field>
+                              <v-text-field readonly v-model="currentEmoji"></v-text-field>
                                 
                               </v-col>
                             </v-row>
@@ -129,7 +130,7 @@
                               color="red"
                               text
                              
-                              @click="edit(key); dialog=false"
+                              @click="edit(key);"
                             >
                               Save
                             </v-btn>
@@ -259,7 +260,7 @@
                               color="red"
                               text
                              
-                              @click="addItem();"
+                              @click="addNewItem();"
                             >
                               Save
                             </v-btn>
@@ -289,7 +290,8 @@
               <div v-for="(item, key) in queue" v-bind:key="key">
                   
                 <div style="text-align: left">
-                  {{item.icon}} {{item.name}}
+                  {{item.icon}} 
+                  {{item.name}} 
                 </div>
                 <div style="text-align: right; margin-top: -23px; margin-bottom: 5px; margin-right: 3px">
                   ${{item.price}}
@@ -464,6 +466,7 @@ export default {
     },
     edit: function(index){
       var vm = this;
+      vm.items[index][0].icon = this.currentEmoji;
       console.log("EDIT ITEM");
 
 
