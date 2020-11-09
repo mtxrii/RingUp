@@ -1,21 +1,2 @@
-# ringup
-
-#### Project setup
-```
-npm install
-```
-
-#### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-#### Compiles and minifies for production
-```
-npm run build
-```
-
-#### Lints and fixes files
-```
-npm run lint
-```
+# RingUp
+#### A simple way to keep track of your clients' orders.
