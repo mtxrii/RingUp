@@ -45,6 +45,9 @@
                           <v-card-title style = "color: black;">
                             {{item[0].name}}
                           </v-card-title>
+                          <div style = "color: #404040; text-align: right; margin-top: -15px; margin-bottom: -15px; margin-right: 20px">
+                            ${{item[0].price}}
+                          </div>
                           <v-card-title style = "font-size: 45px; color: black; ">
                             {{item[0].icon}}
                           </v-card-title>
