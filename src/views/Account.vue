@@ -332,7 +332,7 @@
                 <v-btn
                   small
                   color="green"
-                  @click="router.push('/receipt')" >
+                  @click="openReceipt()" >
                   <v-icon style="margin-right: 10px">mdi-check</v-icon>
                   Checkout
                 </v-btn>
@@ -417,15 +417,19 @@ export default {
     },
     addToOrder: function() {
       store.commit("addToOrder", this.currentItem)
-      this.subtotal += this.currentItem.price;
+      this.subtotal += parseInt(this.currentItem.price);
     },
     removeFromOrder: function(item) {
+      console.log(item)
       store.commit("removeFromOrder", item);
-      this.subtotal -= this.item.price;
+      this.subtotal -= parseInt(item.price);
     },
     clearOrder: function() {
       store.commit('clearOrder');
       this.subtotal = 0;
+    },
+    openReceipt: function() {
+      router.push('/receipt');
     },
 
     selectEmoji(emoji) {
@@ -463,6 +467,8 @@ export default {
       console.log("EDIT ITEM");
 
 
+
+
       console.log(index);
       console.log(vm.items[index][0].name);
       let itemId = Object.keys(this.item_list[index]);
@@ -481,6 +487,11 @@ export default {
             for(let i=0; i<vm.item_list.length; i++){
               this.items[i] = Object.values(vm.item_list[i]);
             }
+            this.subtotal = 0;
+            this.queue.forEach(element => {
+              this.subtotal += parseInt(element.price);
+            });
+
             this.methodThatForcesUpdate();
           })         
       })
@@ -491,14 +502,17 @@ export default {
 
   created() {
     
-    if(!this.user.loggedIn) {
+    if (!this.user.loggedIn) {
       router.push("/");
     }
 
-    for(let i=0; i<this.item_list.length; i++){
+    for (let i=0; i<this.item_list.length; i++){
       this.items[i] = Object.values(this.item_list[i]);
     }
-    console.log(this.items);
+
+    this.queue.forEach(element => {
+      this.subtotal += parseInt(element.price);
+    });
     
   },
 }
